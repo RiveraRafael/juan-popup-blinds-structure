@@ -7,106 +7,80 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
+import BlindStructurePopupComponent from './src/blinds-structure-popup/controller/BlindsStructurePopupComponent';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+const App = () => {
+    const TimeBasedRules = [
+        {
+            after_seconds: 0,
+            ante: 1,
+            big_blind: 2,
+            small_blind: 1,
+        },
+        {
+            after_seconds: 180,
+            ante: 2,
+            big_blind: 4,
+            small_blind: 2,
+        },
+        {
+            after_seconds: 360,
+            ante: 3,
+            big_blind: 8,
+            small_blind: 4,
+        },
+        {
+            after_seconds: 540,
+            ante: 4,
+            big_blind: 16,
+            small_blind: 8,
+        },
+        {
+            after_seconds: 720,
+            ante: 5,
+            big_blind: 32,
+            small_blind: 16,
+        },
+        {
+            after_seconds: 900,
+            ante: 6,
+            big_blind: 64,
+            small_blind: 32,
+        },
+        {
+            after_seconds: 1080,
+            ante: 7,
+            big_blind: 128,
+            small_blind: 64,
+        },
+        {
+            after_seconds: 1260,
+            ante: 8,
+            big_blind: 256,
+            small_blind: 128,
+        },
+        {
+            after_seconds: 1440,
+            ante: 9,
+            big_blind: 512,
+            small_blind: 256,
+        },
+        {
+            after_seconds: 1620,
+            ante: 10,
+            big_blind: 1024,
+            small_blind: 512,
+        },
+    ]
+    return (
+        <View>
+            <BlindStructurePopupComponent
+                TimeBasedRules={TimeBasedRules}
+                CurrentLevel={8}
+            />
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+    )
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
